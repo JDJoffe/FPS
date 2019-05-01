@@ -12,18 +12,22 @@ public class Player : MonoBehaviour
     public float crouchSpeed = 4f;
     public float jumpHeight = 20f;  
     public float groundRayDistance = 1.1f;
-#endregion
+    #endregion
 
-
+    #region start
     // Start is called before the first frame update
     void Start()
     {
 
     }
+    #endregion
 
+    #region update
     // Update is called once per frame
     void Update()
     {
 
     }
+
+    #endregion
 }
