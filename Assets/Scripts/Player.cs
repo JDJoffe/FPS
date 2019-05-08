@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public float groundRayDistance = 1.1f;
     public Vector3 moveDirec;
     public CharacterController charController;
-    private bool isJumping;
+    private bool isJumping = false;
     #endregion
 
     #region start
@@ -65,21 +65,30 @@ public class Player : MonoBehaviour
         #endregion
 
 
-       
+
         float inputH = Input.GetAxis("Horizontal");
         float inputV = Input.GetAxis("Vertical");
 
         //keep speed consistant, speed is not increased when moving diagonal
         Vector3 normalized = new Vector3(inputH, 0f, inputV);
         normalized.Normalize();
-        //move = inputH, inputV
-        Move (normalized.x, normalized.z);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            //move = inputH, inputV
+            Sprint(normalized.x, normalized.z);
+        }
+        else
+        {
+            Walk(normalized.x, normalized.z);
+        }
 
         //jump when on ground and when button pressed
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             //jump
             Jump();
+
         }
 
         //cant jump in air
@@ -101,20 +110,15 @@ public class Player : MonoBehaviour
     }
     #endregion
     //move player in given direction horiz/verti
-    public void Move(float inputH, float inputV)
+    public void Move(float inputH, float inputV, float speed)
     {
         Vector3 direction = new Vector3(inputH, 0f, inputV);
         // convert local direction to worldspace
         direction = transform.TransformDirection(direction);
-        moveDirec.x = direction.x * walkSpeed;
-        moveDirec.z = direction.z * walkSpeed;
-
-        //if (Input.GetKeyDown("Shift"))
-        //{
-        //    Sprint();
-        //}
+        moveDirec.x = direction.x * speed;
+        moveDirec.z = direction.z * speed;
+       
     }
-
 
     //testGrounded
     private bool IsGrounded()
@@ -124,7 +128,7 @@ public class Player : MonoBehaviour
         //return Physics.Raycast(groundRay, groundRayDistance)
 
         //raycast perform
-        if (Physics.Raycast(groundRay, groundRayDistance))
+        if (Physics.Raycast(groundRay, groundRayDistance, groundLayer))
         {
             //return true if hit
             return true;
@@ -136,15 +140,21 @@ public class Player : MonoBehaviour
         //return exits the function 
     }
 
-    public void Sprint()
+    public void Walk(float horizontal, float vertical)
     {
-        
+        Move(horizontal, vertical, walkSpeed);
     }
-   public void Jump()
+
+    public void Sprint(float horizontal, float vertical)
+    {
+        Move(horizontal, vertical, runSpeed);
+    }
+
+    public void Jump()
     {
         moveDirec.y = jumpHeight;
         isJumping = true;
     }
-    
-    
+
+
 }
