@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public Vector3 moveDirec;
     public CharacterController charController;
     private bool isJumping = false;
+
+    
     #endregion
 
     #region start

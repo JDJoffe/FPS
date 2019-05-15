@@ -31,17 +31,43 @@ public class Weapon : MonoBehaviour
         }
 
     }
-    void Reload()
+   public void Reload()
     {
+        //if bullets in reserve
+        if (currentReserve > 0)
+        {
+            //if enough bullets
+            if (currentReserve >= maxClip)
+            {
+                //reduce clip size by offset from current clip to max clip
+                int offset = maxClip - currentClip;
+                currentReserve -= offset;
+            }
+            //if clip under max clip
+            if (currentClip < maxClip)
+            {
 
+            }
+        }
     }
 
-    void Shoot()
+   public void Shoot()
     {
         //reduce clip size
+        currentClip--;
         //reset shoottimer
+        shootTimer = 0f;
         //reset canshoot
+        canShoot = false;
         //get origin + direction of fire
+        Camera attachedCamera = Camera.main;
+        Transform camTransform = attachedCamera.transform;
+        Vector3 lineOrigin = shootOrigin.position;
+        Vector3 direction = camTransform.forward;
         //shootbullet
+        GameObject clone = Instantiate(bulletPrefab, camTransform.position, camTransform.rotation);
+        Bullet bullet = clone.GetComponent<Bullet>();
+        bullet.Fire(lineOrigin, direction);
+
     }
 }
