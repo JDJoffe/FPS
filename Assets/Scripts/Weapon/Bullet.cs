@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 10f;
+    public GameObject effectPrefab;
+    public Transform line;
+
+    private Rigidbody rigid;
+   
+    void Awake()
     {
         
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         
