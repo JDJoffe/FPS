@@ -1577,6 +1577,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1865225041}
+    - target: {fileID: 1276030608941013515, guid: 3de8b5a0f49e4fa4a9df2d401f492a64,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1865225041}
+    - target: {fileID: 1276030608941013515, guid: 3de8b5a0f49e4fa4a9df2d401f492a64,
+        type: 3}
+      propertyPath: stoppingDistance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5924668977542872393, guid: 3de8b5a0f49e4fa4a9df2d401f492a64, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3de8b5a0f49e4fa4a9df2d401f492a64, type: 3}

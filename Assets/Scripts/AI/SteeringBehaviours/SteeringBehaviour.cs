@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class SteeringBehaviour : MonoBehaviour
 {
-    public float weighting=7.5f;
+    public float weighting = 7.5f;
     //ref to owner for getting velocity
     protected AI owner;
-   
+
     //getcomponents
     void Awake()
     {
@@ -27,8 +27,8 @@ public class SteeringBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-  
+
 }
 
