@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public Transform HealthBarParent;
     public Transform healthbarPoint;
     public GameObject healthBarUIPrefab;
+    public Renderer rend;
     public int maxHealth = 100;
     private int health = 0;
 
@@ -22,6 +23,9 @@ public class Enemy : MonoBehaviour
         //spawn healthbarUI into parent
         GameObject Clone = Instantiate(healthBarUIPrefab, HealthBarParent);
         healthSlider = Clone.GetComponent<Slider>();
+
+        //get component from this gameobject
+        rend = GetComponent<Renderer>();
     }
 
     void OnDestroy()
@@ -35,18 +39,26 @@ public class Enemy : MonoBehaviour
     {
         //update position of healthbar
         // + offset
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(healthbarPoint.position);
-        healthSlider.transform.position = screenPosition;
+        if (rend.isVisible)
+        {
+            healthSlider.gameObject.SetActive(true);
 
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(healthbarPoint.position);
+            healthSlider.transform.position = screenPosition;
+        }
+        else
+        {
+            healthSlider.gameObject.SetActive(false);
+        }
     }
     public void TakeDamage(int damage)
     {
         health -= damage;
         //update slider
         //convert to percentage
-        healthSlider.value = health / maxHealth;
+        healthSlider.value = (float)health / (float)maxHealth;
         //health == 0
-        if (health <= 0)
+        if (health < 0)
         {
             //deatroy gameobject
             Destroy(gameObject);

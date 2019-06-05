@@ -18,7 +18,7 @@ public class Shooting : MonoBehaviour
         if (currentWeapon)
         {
             //if fire button down
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
                 if (currentWeapon.canShoot)
                 {
